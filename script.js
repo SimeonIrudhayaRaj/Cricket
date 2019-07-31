@@ -19,8 +19,8 @@ onmousemove = function(e)
 
 }   
 bowl= setInterval(newBall,3000)
-stumpHit= setInterval(stCollide,50)
-batHit = setInterval(collide,50);
+stumpHit= setInterval(stCollide,0.001)
+batHit = setInterval(collide,0.001);
 
 function stCollide()
 {
