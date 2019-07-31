@@ -1,0 +1,111 @@
+<html>
+    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+        
+    </script>
+    <body >
+        <p id="score"></p>
+        <img id="bat" src="bat.png">
+        <img id="ball" src="ball.png">
+        <img id="stump" src="stump.png">
+        <div id="grass"></div>
+    </body>
+    <style>
+    #bat{
+        height: 300px;
+        width: 100px;
+        position: absolute;
+        left :50px;
+    }
+    #ball{
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        left: 1350px;
+        
+    }
+    #stump{
+        position: absolute;
+        height: 300px;
+        width: 30px;
+        left: 100px;
+        top:340px;
+    }
+    #grass
+    {
+        position: absolute;
+        height: 100px;
+        width: 1530px;
+        left: 0px;
+        top:640px;
+        background-color: greenyellow;
+    }
+  
+    </style>
+    <script>
+        var score=0;
+        var batTop;
+        var batLeft;
+        var release,pitch,hit;
+        onmousemove = function(e){
+            console.log("mouse location:", e.clientX, e.clientY)
+             $("#bat").css("left",e.clientX);
+             $("#bat").css("top",e.clientY);
+            batLeft=e.clientX;
+            batTop=e.clientY
+            
+          bowl= setInterval(newBall,3000)
+
+          stumpHit= setInterval(stCollide,3000)
+          batHit = setInterval(collide,50);
+          function stCollide(){
+            var ballPos= $("#ball").position();
+            var ballTop=ballPos.top;
+            var ballLeft=ballPos.left;
+            var stPos= $("#stump").position();
+            var stTop=stPos.top;
+            var stLeft=stPos.left;
+            if(ballLeft>=stLeft&&ballLeft<=stLeft+35&&ballTop>=stTop&&ballTop<=stTop+320){
+                alert("out\n Your score :"+Math.floor(score));
+                score=0}
+          }
+          function collide(){
+            var ballPos= $("#ball").position();
+            var ballTop=ballPos.top;
+            var ballLeft=ballPos.left;
+            console.log("ball location:", ballLeft, ballTop)
+            
+            if(ballLeft>=batLeft+10&&ballLeft<=batLeft+60&&ballTop>=batTop&&ballTop<=batTop+290)
+            {
+                score=score+0.01;
+                $("#ball").stop();
+                $("p").replaceWith(score);
+            }
+            }
+          }
+        function newBall(){
+            release=getRandomArbitrary(50,600);
+            pitch=getRandomArbitrary(250,600);
+            hit=getRandomArbitrary(200,520);
+
+            // while(height>350)
+            //     release=Math.random()*1000;
+           
+            // while(pitch>300&&pitch<600)
+            // pitch=Math.random()*1000;
+           
+            // while(hit>350&&hit<600)
+            // hit=Math.random()*1000;
+           
+            $("#ball").animate({top: release+"px", left:"1400px"},0,"linear");
+            
+            $("#ball").animate({top: "600px", left:pitch+"px"},800,"linear");
+            $("#ball").animate({top: hit+"px", left:"80px"},500,"linear");
+        }
+           
+        function getRandomArbitrary(min, max)
+        {
+            return Math.random() * (max - min) + min;
+        }
+
+    </script>
+</html>
