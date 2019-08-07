@@ -204,7 +204,7 @@ function collide()
           if(ballLeft>1480)
             run=1
 
-        }else if(ballTop<=batTop+150)
+        }else if(ballTop<=batTop+180)
         {
           $("#ball").stop(true,false);
           $("#ball").animate({top: "100px", left:"1600px"},800,"linear");
@@ -222,7 +222,7 @@ function collide()
           ballLeft=ballLeft+300;
           $("#ball").stop(true,false);
           $("#ball").animate({top: "600px", left:ballLeft+"px"},200,"linear");
-          $("#ball").animate({top: "500px", left:"1600px"},400,"linear");
+          $("#ball").animate({top: "500px", left:"1600px"},600,"linear");
           run=2;
 
         }else
